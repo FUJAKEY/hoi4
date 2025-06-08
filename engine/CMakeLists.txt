@@ -16,7 +16,6 @@ set(engine_public_headers
 target_sources(engine
     PRIVATE
         core/Logger.cpp
-        core/ECS.cpp
         core/EventBus.cpp
         graphics/Graphics.cpp
         ui/ImGuiWrapper.cpp
