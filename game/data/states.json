@@ -1,0 +1,4 @@
+[
+    {"id":1, "centroid":[100,200], "owner":"GER", "manpower":100000, "resources":{"oil":2, "steel":3, "chromium":0}},
+    {"id":2, "centroid":[300,400], "owner":"USA", "manpower":50000, "resources":{"oil":5, "steel":1, "chromium":1}}
+]
