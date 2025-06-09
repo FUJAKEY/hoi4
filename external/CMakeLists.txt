@@ -3,12 +3,22 @@ include(FetchContent)
 FetchContent_Declare(SDL2
     URL https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.26.1.zip
 )
+set(SDL2_DISABLE_INSTALL ON CACHE BOOL "" FORCE)
+set(SDL_WERROR OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(SDL2_image
     URL https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.2.zip
 )
+set(SDL2IMAGE_INSTALL OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(SDL2_ttf
     URL https://github.com/libsdl-org/SDL_ttf/archive/refs/tags/release-2.20.1.zip
 )
+set(SDL2TTF_INSTALL OFF CACHE BOOL "" FORCE)
+
+# Используем системную библиотеку freetype, чтобы избежать дополнительных
+# загрузок и ускорить конфигурацию.
+set(SDL2TTF_VENDORED OFF CACHE BOOL "" FORCE)
+set(SDL2TTF_SAMPLES OFF CACHE BOOL "" FORCE)
+set(SDL2TTF_HARFBUZZ OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(glm
     GIT_REPOSITORY https://github.com/g-truc/glm.git
     GIT_TAG 0.9.9.8
@@ -23,6 +33,20 @@ FetchContent_Declare(dearimgui
 )
 
 FetchContent_MakeAvailable(SDL2 SDL2_image SDL2_ttf glm nlohmann_json dearimgui)
+
+# Отключаем предупреждения SDL, которые трактуются как ошибки
+add_compile_options(
+    -Wno-error
+    -Wno-error=sign-compare
+    -Wno-error=declaration-after-statement
+)
+
+if(TARGET SDL2)
+    target_compile_options(SDL2 PRIVATE
+        -Wno-error
+        -Wno-error=sign-compare
+        -Wno-error=declaration-after-statement)
+endif()
 
 # Provide interface libraries
 add_library(external_sdl INTERFACE)

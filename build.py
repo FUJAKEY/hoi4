@@ -77,6 +77,8 @@ if __name__ == '__main__':
 
     ensure_tool('cmake', 'cmake')
     ensure_tool('make', 'build-essential')
+    ensure_tool('pkg-config', 'pkg-config')
+    ensure_tool('freetype-config', 'libfreetype-dev')
 
     if args.windows:
         ensure_tool('x86_64-w64-mingw32-gcc', 'mingw-w64')
