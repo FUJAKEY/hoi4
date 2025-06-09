@@ -14,9 +14,9 @@ FetchContent_Declare(SDL2_ttf
 )
 set(SDL2TTF_INSTALL OFF CACHE BOOL "" FORCE)
 
-# Используем системную библиотеку freetype, чтобы избежать дополнительных
-# загрузок и ускорить конфигурацию.
-set(SDL2TTF_VENDORED OFF CACHE BOOL "" FORCE)
+# Всегда используем встроенный freetype, чтобы кросс‑компиляция для Android
+# проходила без необходимости искать системные dev-пакеты.
+set(SDL2TTF_VENDORED ON CACHE BOOL "" FORCE)
 set(SDL2TTF_SAMPLES OFF CACHE BOOL "" FORCE)
 set(SDL2TTF_HARFBUZZ OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(glm
